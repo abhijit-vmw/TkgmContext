@@ -1,3 +1,55 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://192.168.101.12:6443
+  name: arcas-tkgm
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://192.168.101.31:6443
+  name: test-tkgm
+contexts:
+- context:
+    cluster: arcas-tkgm
+    user: arcas-tkgm-admin
+  name: arcas-tkgm-admin@arcas-tkgm
+- context:
+    cluster: test-tkgm
+    user: test-tkgm-admin
+  name: test-tkgm-admin@test-tkgm
+current-context: test-tkgm-admin@test-tkgm
+kind: Config
+preferences: {}
+users:
+- name: arcas-tkgm-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+- name: test-tkgm-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+[root@localhost tkg-concourse-pipelines]# kubectl config view --raw
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5ekNDQWJPZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EZ3lOREF6TXpReU1sb1hEVE14TURneU1qQXpNemt5TWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTXZ1Cks3enh3blIwU2JVQ3JZWWkrVUNUWGJ4VDNUYVp1dUZMK0ZVWk1USEhWZ2gvaGc4SVNCRkpFcVRtWmhwQi9NVFcKVFBMaFdxMjN1ZkpWUGJnTFRVYW1pNjdtMUZHZldjRWt4cWR1QlB4bGVaS1A1TVNQdmxRQkk0WXVwQnJzd3o4NgpCUE95N1A0ZW9odEZwVFhNYithbmMzcEFkQ0ZEeW9qdDJDbzFiVWoxZjlaVWJxdVc5aC9YOEVoWVJmV2V6WDJhCkxOZndFQkhIOVB2QU5rQmNqRENBaUJHODlPSFZjZ05NNkxKeVgzZWN6UnpRT29iWnMvWVdRNnpmdStjdEtXSWYKNTFHNzVxOS9JQXZidGRYVlpMNkd1ZHlaWk1wOXgrS050YWR3YUNRdHRXWmdTNzVBVGdhcWZBdzFoLzNheUVnZAphV2I0S0dGd0g4U2ZqNjNpcytrQ0F3RUFBYU1tTUNRd0RnWURWUjBQQVFIL0JBUURBZ0trTUJJR0ExVWRFd0VCCi93UUlNQVlCQWY4Q0FRQXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBTFlhZ3lOTnZRbTRxNEIva3FXOTlnV3UKVzR5bkxyeFFPVFNtUFdZcnczbU9LbXQrdXBiKzBUZXQ1ZEdkd0k3TVRYUXkyM05wR0hEd2tvTVZGS3FHeGk3Kwp6NEczVHF1K1FZRkk5MjR2dWxIUHRPZDVjT2VFRWhZNzJuSUZ2MEl0UlhyZnE1cEFaSXF4alQzZ3pMWEFXQ0FRCkpjV0ltblhTaGg5TjcycWgzVEM1blg1QTJqaU1RTzJNUFZnMDFLOVRqYXdjTVhicGpOajVqeUVDRkdSYWZydDIKU0p0UFJwUWUvTXcwRG9pUTJld3RLNFRjaVVGV0JwTnY4cU1RY0t5aWhvcTVUWjBvTFpQL2xheit6WDljNGd2UQp6OUNnZVV2RnBZUGQrNDNaNUtvb01na3NHY2ZyL2Nrd0VrSS9FMEpVeXNzVGxRaTlmZXRvd3R4cTcvbnl3R0k9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.101.12:6443
+  name: arcas-tkgm
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5ekNDQWJPZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1EZ3lOVEExTlRnME0xb1hEVE14TURneU16QTJNRE0wTTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTm5mCkJpVmVpeEx6ZFlkc3h1TVAxRTRSZUxadWx0MEo1allRU2hjcmxFdmU3V2pxM0FQMGhZZWwxZTcrU04wbGVLZE8KcVNzU3pBVHlydjk4d0FGSUpaWTlOZU54N1N1bVplYUJaNmZPQlBVUDNGZStoYThTTkg1eW55M01iY05CUXBYKwpSOGFSc1cyNnN5bGV1eUJPQ0l5SWJNdnVUZXEzaEVNbmw3YXVtOFhSc1V5b0pGcThOcHd4V3I4Mm1LdXdxK3lICm9mRmRwQXBSa2t1cFF5eE9OT2RHckdPTWYzdFpCeWs1YzY2TzhBQ1cvL3lSZm8vVzhBbUtHVlZjTFo4d2tEYUQKU0NlT1NLOUZHZWcwdXZVNWxZK0tyYXJRb081ZUFjN3I4ZzF3RXgxWGtIQ2dlM050SUZ3YWQ2d1FPdEV0WlRYegpPdDVqeGwvRFJPcTBkb0lhamtzQ0F3RUFBYU1tTUNRd0RnWURWUjBQQVFIL0JBUURBZ0trTUJJR0ExVWRFd0VCCi93UUlNQVlCQWY4Q0FRQXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSU9JdkZtL3hjRXUrRXVTdVR4Y0xLb1gKNGZKL25yVjRpOFc0RE9qS2xGeWY0djB1bUpzRExFaUViQnI2QkZhdzlIVlMxeVc1T25IcXRITUl0ZXBvemMvbwo2a2MzTWhVSjVVS3pDQlBBclhnZzY3UEVRRmF3L1pOOTVmR1hXdGQ0cHRJL3BINnB4R0x5OU5jc2poR2YvckVpCkxPWmtqbHlOMkEyQlVPWFVYTlJFU1ZVWFEySHlLbDAyWnVxR2pvZDQwNHVPbTVPMWRGUDJZbFdTckYxenNsbjIKVldWUW5xZi9jSjRmNzJGUE93OUFHYXJVL3dLZmthUW1QMkRnby9ySlNJY29BSFdlR3o2QXJqRnlQL1FRRHBPbwpUQlhKMW5qQlpKWERqbHhvSElwU1NvL0ZsZXlBSWJ3eXliK2NlSkdrUUxNYzhwQjNKSnNMV1hKK3ZOR3E2ZEU9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://192.168.101.31:6443
+  name: test-tkgm
+contexts:
+- context:
+    cluster: arcas-tkgm
+    user: arcas-tkgm-admin
+  name: arcas-tkgm-admin@arcas-tkgm
+- context:
+    cluster: test-tkgm
+    user: test-tkgm-admin
+  name: test-tkgm-admin@test-tkgm
+current-context: test-tkgm-admin@test-tkgm
 kind: Config
 preferences: {}
 users:
